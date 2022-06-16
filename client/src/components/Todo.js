@@ -36,6 +36,17 @@ class Todo extends Component {
             .catch((err) => console.log(err));
     };
 
+    editTodo = (id, action) => {
+        return axios
+            .patch(`/api/todos/${id}`, { action })
+            .then((res) => {
+                if (res.data) {
+                    this.getTodos();
+                }
+            })
+            .catch((err) => console.log(err));
+    };
+
     render() {
         let { todos } = this.state;
 
@@ -43,7 +54,7 @@ class Todo extends Component {
             <div>
                 <h1>My Todo(s)</h1>
                 <Input getTodos={this.getTodos} />
-                <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
+                <ListTodo todos={todos} deleteTodo={this.deleteTodo} editTodo={this.editTodo}/>
             </div>
         );
     }

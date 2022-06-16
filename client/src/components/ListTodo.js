@@ -1,21 +1,20 @@
 import React from 'react';
+import TodoElement from "./TodoElement";
 
-const ListTodo = ({ todos, deleteTodo }) => {
+const ListTodo = ({ todos, deleteTodo, editTodo }) => {
     return (
         <ul>
-            {todos && todos.length > 0 ? (
+            {todos && todos.length > 0
+                ? (
                 todos.map((todo) => {
-                    return (
-                        <li key={todo._id} onClick={() => deleteTodo(todo._id)}>
-                            {todo.action}
-                        </li>
-                    );
-                })
-            ) : (
+                    return (<TodoElement key={todo._id} todo={todo} deleteTodo={deleteTodo} editTodo={editTodo}/>);
+                }))
+                : (
                 <li>No todo(s) left</li>
-            )}
+                )
+            }
         </ul>
     );
-};
+}
 
 export default ListTodo;
